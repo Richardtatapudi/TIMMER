@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Timer</title>
+<style>
+  body {
+    background-color: rgb(169, 179, 79);
+    align-items: center;
+  }
+  
+  .timer {
+    text-align: center;
+    background-color: #3c9eab;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 250px;
+  }
+  
+  #timer {
+    font-size: 36px;
+    font-weight: bold;
+    color: #7904f5;
+    
+  }
+
+  .btn {
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+    padding:  20px;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+    background-color: green;
+    border-radius: 40px;
+    border-width: 0px;
+  }
+  .btn1 {
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 20px;
+    padding:  20px;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+    background-color:red;
+    border-radius: 20px;
+    border-width: 0px;
+  }
+  .btn2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 20px;
+    padding:  20px;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+    background-color: orange;
+    border-radius: 10px;
+    border-width: 0px;
+  }
+</style>
+</head>
+<body>
+
+<div class="timer">
+  <h1> TIMER</h1>
+  <div id="timer">00:00:00</div>
+  <button id="startBtn" class="btn">Start</button>
+  <button id="stopBtn" class="btn1">Stop</button>
+  <button id="restartBtn" class="btn2">Restart</button>
+</div>
+
+<script>
+  var timerInterval;
+
+  function startTimer(durationa, display) {
+    var timer = duration, hours, minutes, seconds;
+    timerInterval = setInterval(function () {
+      hours = parseInt(timer / 3600, 10);
+      minutes = parseInt((timer % 3600) / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = hours + ":" + minutes + ":" + seconds;
+
+      if (timer-- < 0) {
+        timer = duration;
+      }
+    }, 100);
+  }
+
+  var duration = 3600;
+  var initialDuration = duration;
+  var timerDisplay = document.getElementById('timer');
+  var startBtn = document.getElementById('startBtn');
+  var stopBtn = document.getElementById('stopBtn');
+  var restartBtn = document.getElementById('restartBtn');
+
+  startBtn.addEventListener('click', function() {
+    startTimer(duration, timerDisplay);
+  });
+
+  stopBtn.addEventListener('click', function() {
+    clearInterval(timerInterval);
+  });
+
+  restartBtn.addEventListener('click', function() {
+    clearInterval(timerInterval);
+    timerDisplay.textContent = "00:00:00";
+    duration = initialDuration;
+  });
+</script>
+
+</body>
+</html>
